@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>title</title>
+  <style>
+     body{margin:30px}
+    ul{
+        color: red;
+    }
+    .formupload{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imgupload{
+        max-width: 300px;
+        max-height: 300px;
+    }
+    button{
+        width: 50px;
+    }
+  </style>
+
+ <script src="/static/lib/jquery-3.6.0.js"></script>
+  <script>
+   /*
+   * 只能在此处进行答题
+   * */
+
+
+    let Isupload = false;
+    function handleFiles(files){
+        if(files.length){
+            var FormDate = new FormData()
+            FormDate.append('file', $('#file')[0].files[0])
+   
+            console.log(FormDate)
+            $.ajax({
+                url: '/qusetion',
+                type: 'post',
+                processData: false, //必须 缓存关了
+                contentType: false, //必须 关闭 设置 数据格式（以 数据本身格式为准 xxxxx urlencoded）
+                
+                // 用来处理上传二进制文件
+                data: FormDate,
+                success (res) {
+                    $('#img').attr('src', res.data)
+                }
+            })
+        }
+    }
+
+
+    function upload(){
+      alert("上传成功！")  
+    }
+
+    // $('button').click(function () {
+   
+    //     // var FormDate = new FormData()
+    //     // FormDate.append('file', $('#file')[0].files[0])
+
+    //     // $.ajax({
+    //     //     url: '/upload',
+    //     //     type: 'post',
+    //     //     processData: false, //必须 缓存关了
+    //     //     contentType: false, //必须 关闭 设置 数据格式（以 数据本身格式为准 xxxxx urlencoded）
+    //     //     // 用来处理上传二进制文件
+    //     //     data: FormDate,
+    //     //     success: function (res) {
+    //     //         $('#img').attr('src', res.data)
+    //     //     }
+    //     // })
+    // })
+
+  </script>
+
+</head>
+<body>
+<h2>功能：本地图片预览组件img-viewer,点击上传按钮上传到服务器</h2>
+<ol>
+  <li>自定义html组件<code>&lt;img-viewer&gt;&lt;/img-viewer&gt;</code>。</li>
+  <li>img-viewer组件支持选择本地图片，并展示到网页中。</li>
+  <li>用nodejs搭建本地文件上传服务器，点击上传按钮将图片上传到服务器</li>
+</ol>
+<h2>注意</h2>
+<ul>
+  <li>请使用原生js答题，无需做浏览器兼容，在chrome上正常运行即可。</li>
+  <li>只允许在head<code>&lt;script&gt;&lt;/script&gt;</code>进行编码。请勿修改其他编码</li>
+  <li>上传服务端代码自行搭建，可使用任意框架</li>
+</ul>
+  <p>
+    <h5>组件效果</h5>
+    <!-- <img-viewer></img-viewer> -->
+
+    <div class="formupload">
+        <input type="file" name="file" accept="image/*" onchange="handleFiles(this.files)"  id="file"/>
+        <img  class="imgupload" src="" alt="" id="img" />
+
+         <button onclick="upload()">上传</button>
+    </div>
+    
+  </p>
+</body>
+</html>
+
