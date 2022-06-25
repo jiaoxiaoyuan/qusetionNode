@@ -29,15 +29,12 @@
    /*
    * 只能在此处进行答题
    * */
-
-
     let Isupload = false;
     function handleFiles(files){
         if(files.length){
             var FormDate = new FormData()
             FormDate.append('file', $('#file')[0].files[0])
    
-            console.log(FormDate)
             $.ajax({
                 url: '/qusetion',
                 type: 'post',
@@ -76,6 +73,9 @@
     //     // })
     // })
 
+
+
+
   </script>
 
 </head>
@@ -95,6 +95,8 @@
   <p>
     <h5>组件效果</h5>
     <!-- <img-viewer></img-viewer> -->
+
+  
 
     <div class="formupload">
         <input type="file" name="file" accept="image/*" onchange="handleFiles(this.files)"  id="file"/>

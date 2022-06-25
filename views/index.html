@@ -17,5 +17,29 @@
         <br />
 
         <a href="/qusetion.html">面试题</a>
+
+        <br />
+
+        <my-component></my-component>
     </body>
 </html>
+
+<script>
+    customElements.define(
+        'my-component',
+        class extends HTMLElement {
+            constructor() {
+                super()
+
+                // this 就是组件自己
+                console.log(this)
+
+                this.innerHTML = '自定义组件内容'
+                this.onclick = () => {
+                    // customElements.get 用于获取一个组件
+                    console.log('compoent:', customElements.get('my-component'))
+                }
+            }
+        }
+    )
+</script>
